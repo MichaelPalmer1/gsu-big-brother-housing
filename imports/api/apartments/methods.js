@@ -1,0 +1,1 @@
+import { Apartments } from "../apartments.js";
