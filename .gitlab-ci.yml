@@ -1,0 +1,53 @@
+stages:
+  - deploy
+  - cleanup
+
+variables:
+  HEROKU_APP: big-brother-housing
+
+.deploy: &deploy
+  stage: deploy
+  image: michaelpalmer/heroku-cli
+  before_script:
+    - gem install dpl
+
+deploy staging app:
+  <<: *deploy
+  script:
+    - export APP_EXISTS=`heroku apps:info $HEROKU_APP-$CI_BUILD_REF_NAME`
+    - '[ "$APP_EXISTS" != "" ] || heroku apps:create $HEROKU_APP-$CI_BUILD_REF_NAME --buildpack https://github.com/AdmitHub/meteor-buildpack-horse.git'
+    - '[ "$APP_EXISTS" != "" ] || heroku config:set ROOT_URL=https://$HEROKU_APP-$CI_BUILD_REF_NAME.herokuapp.com'
+    - '[ "$APP_EXISTS" != "" ] || heroku addons:create mongolab'
+    - dpl --provider=heroku --api-key=$HEROKU_API_KEY --app=$HEROKU_APP-$CI_BUILD_REF_NAME
+  environment:
+    name: staging/$CI_BUILD_REF_NAME
+    url: https://$HEROKU_APP-$CI_BUILD_REF_NAME.herokuapp.com
+    on_stop: stop staging app
+  except:
+    - master
+
+deploy to production:
+  <<: *deploy
+  script: dpl --provider=heroku --api-key=$HEROKU_API_KEY --app=$HEROKU_APP
+  environment: production
+  only:
+    - master
+
+.remove_staging: &remove_staging
+  image: michaelpalmer/heroku-cli
+  script: heroku apps:destroy -a $HEROKU_APP-$CI_BUILD_REF_NAME -c $HEROKU_APP-$CI_BUILD_REF_NAME
+  except:
+    - master
+
+stop staging app:
+  <<: *remove_staging
+  stage: deploy
+  when: manual
+  environment:
+    name: staging/$CI_BUILD_REF_NAME
+    action: stop
+
+cleanup staging:
+  <<: *remove_staging
+  stage: cleanup
+  when: on_failure
