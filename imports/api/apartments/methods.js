@@ -1,1 +1,1 @@
-import { Apartments } from "../apartments.js";
+import { Apartments } from './apartment';

@@ -1,6 +1,7 @@
-import { Residents } from "../residents.js";
+import { Residents } from "./residents";
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check';
+
 Meteor.methods
 ({
     'residents.insert'(firstName,lastName)
