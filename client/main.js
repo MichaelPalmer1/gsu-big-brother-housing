@@ -16,8 +16,6 @@ import 'moment';
 // import 'gentelella/build/css/custom.min.css';
 
 // JavaScript
-// import 'gentelella/vendors/jquery/dist/jquery.min'
-// import 'gentelella/vendors/jquery/dist/jquery.min.js';
 // import 'gentelella/vendors/bootstrap/dist/js/bootstrap.min.js';
 // import 'gentelella/vendors/fastclick/lib/fastclick.js';
 // import 'gentelella/vendors/nprogress/nprogress.js';
@@ -36,7 +34,6 @@ import '../public/vendors/Flot/jquery.flot.resize.js';
 // import 'gentelella/flot/jquery.flot.spline.js';
 // import 'gentelella/flot/curvedLines.js';
 // import 'gentelella/maps/jquery-jvectormap-2.0.3.min.js';
-// import 'gentelella/moment/moment.min.js';
 // import 'gentelella/datepicker/daterangepicker.js';
 // import 'gentelella/build/js/custom.min.js';
 
