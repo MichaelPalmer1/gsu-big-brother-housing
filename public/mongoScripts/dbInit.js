@@ -6,7 +6,7 @@
 
 //create apartments
 var apartment;
-for(var i = 1; i< 13; i++);//make 12 apartments
+for(var i = 1; i< 13; i++)//make 12 apartments
 {
     apartment = {"_id": i, "lease": null, "residents": []};
     db.Apartments.insert(apartment);
