@@ -1,0 +1,28 @@
+<template name="leases">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Apt #</th>
+            <th>Rent</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Signer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each leases}}
+            {{> lease}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="lease">
+    <tr>
+        <th scope="row">{{ apartment }}</th>
+        <td>${{ rent }}</td>
+        <td>{{ startDate }}</td>
+        <td>{{ endDate }}</td>
+        <td>{{ signer.firstName }} {{ signer.lastName }}</td>
+    </tr>
+</template>

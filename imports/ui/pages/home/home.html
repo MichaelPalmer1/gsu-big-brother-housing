@@ -1,39 +1,10 @@
 
 <template name="home">
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Sex</th>
-          <th>Date of Birth</th>
-          <th>Race</th>
-          <th>Occupation</th>
-          <th>Salary</th>
-          <th>Apartment</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each residents}}
-              {{> resident}}
-        {{/each}}
-      </tbody>
-    </table>
+    <h2>Residents</h2>
+    {{> residents }}
 
-</template>
+    <h2>Apartments</h2>
+    {{> apartments }}
 
-<template name="resident">
-    <tr>
-      <th scope="row">{{ id }}</th>
-      <td>{{ firstName }}</td>
-      <td>{{ lastName }}</td>
-      <td>{{ sex }}</td>
-      <td>{{ dateOfBirth }}</td>
-      <td>{{ race }}</td>
-      <td>{{ occupation }}</td>
-      <td>{{ salary }}</td>
-      <td>{{ apartment }}</td>
-    </tr>
 </template>

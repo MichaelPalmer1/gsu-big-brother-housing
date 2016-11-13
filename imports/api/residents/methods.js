@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check';
 
 if (Meteor.isServer) {
-    Meteor.publish('residents', function residentPublish() {
-        return Residents.find();
+    Meteor.publish('residents', function publishResidents() {
+        return Residents.find({});
     });
 }
 

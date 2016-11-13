@@ -1,0 +1,30 @@
+<template name="apartments">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Apt #</th>
+            <th>Lease</th>
+            <th>Residents</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each apartments}}
+            {{> apartment}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="apartment">
+    <tr>
+        <th scope="row">{{ _id }}</th>
+        <td>
+            {{#if lease }}
+                Yes
+            {{else}}
+                No
+            {{/if}}
+        </td>
+        <td>{{ residents.length }}</td>
+    </tr>
+</template>
