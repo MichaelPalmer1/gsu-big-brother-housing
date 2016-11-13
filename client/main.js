@@ -4,21 +4,8 @@
 // import './main.html';
 //import './index.html';
 
-import 'jquery';
 import 'moment';
 
-// Stylesheets
-// import 'gentelella/vendors/bootstrap/dist/css/bootstrap.min.css';
-// import 'gentelella/vendors/font-awesome/css/font-awesome.min.css';
-// import 'gentelella/vendors/iCheck/skins/flat/green.css';
-// import 'gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css';
-// import 'gentelella/production/css/maps/jquery-jvectormap-2.0.3.css';
-// import 'gentelella/build/css/custom.min.css';
-
-// JavaScript
-// import 'gentelella/vendors/bootstrap/dist/js/bootstrap.min.js';
-// import 'gentelella/vendors/fastclick/lib/fastclick.js';
-// import 'gentelella/vendors/nprogress/nprogress.js';
 import '../public/vendors/Chart.js/dist/Chart.min.js';
 import '../public/vendors/gauge.js/dist/gauge.min.js';
 import '../public/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js';
