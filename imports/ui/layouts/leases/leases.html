@@ -20,7 +20,7 @@
 <template name="lease">
     <tr>
         <th scope="row">{{ apartment }}</th>
-        <td>${{ rent }}</td>
+        <td>{{#if rent}}${{/if}}{{ rent }}</td>
         <td>{{ startDate }}</td>
         <td>{{ endDate }}</td>
         <td>{{ signer.firstName }} {{ signer.lastName }}</td>
