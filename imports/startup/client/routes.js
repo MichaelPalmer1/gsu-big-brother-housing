@@ -4,10 +4,12 @@ import { Router } from 'meteor/iron:router';
 import '../../ui/layouts/main_layout/main.html';
 import '../../ui/pages/home/home.html';
 import '../../ui/pages/admin/admin.html';
+import '../../ui/pages/error/error.html';
 
 
 Router.configure({
-   layoutTemplate: "main"
+   layoutTemplate: "main",
+   notFoundTemplate: "error"
 });
 
 
