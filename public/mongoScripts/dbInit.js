@@ -186,7 +186,9 @@ for(var i = 1; i< 13; i++)//make 12 apartments
     };
 
 
-    db.Residents.save(woman);
+    db.Residents.save(older);
+    db.Residents.save(younger);
+    db.Residents.save(friend);
 
     signer = db.Residents.findOne({"firstName" : older.firstName, "lastName" : older.lastName});//should return object id
 

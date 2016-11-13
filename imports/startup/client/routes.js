@@ -6,6 +6,11 @@ import '../../ui/pages/home/home.html';
 import '../../ui/pages/admin/admin.html';
 import '../../ui/pages/error/error.html';
 
+// javascript files
+import '../../ui/pages/home/home';
+import '../../ui/pages/admin/admin';
+import '../../ui/pages/error/error';
+
 
 Router.configure({
    layoutTemplate: "main",
