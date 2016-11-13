@@ -1,17 +1,15 @@
 //for the field 'timeIn' it will be intialized by the first day of the lease
 
-var conn = new Mongo();
-
-
-
-var db = conn.getDB("BigBrother");
+// var conn = new Mongo();
+//
+// var db = conn.getDB("BigBrother");
 
 //create apartments
 var apartment;
 for(var i = 1; i< 13; i++);//make 12 apartments
 {
     apartment = {"_id": i, "lease": null, "residents": []};
-    db.Apartments.save(apartment);
+    db.Apartments.insert(apartment);
 }
 //
 //Construct families that make up residents
@@ -45,18 +43,17 @@ for(var i = 1; i< 13; i++);//make 12 apartments
     db.Residents.save(mom);
     db.Residents.save(son);
 
-    var signer = db.Residents.find({"firstName" : "Erika", "lastName" : "Roman"},{});//should return object id
+    var signer = db.Residents.findOne({"firstName" : "Erika", "lastName" : "Roman"},{});//should return object id
+    var lease = {
+        "rent" : 735.22,
+        "apartment" : 1,
+        "startDate" : new Date("2016-01-5T00:00:00"),
+        "endDate" : new Date("2017-01-5T00:00:00"),
+        "signer" : signer
+}
+    db.Leases.insert(lease);
 
-    db.Leases.save(
-        {
-            "rent" : 735.22,
-            "apartment" : 1,
-            "startDate" : new Date("2016-01-5T00:00:00"),
-            "endDate" : new Date("2017-01-5T00:00:00"),
-            "signer" : signer
-    });
-
-//Family 2, Single Woman with no kids 
+//Family 2, Single Woman with no kids
     var woman =
     {
         "firstName" : "Rhonda",
@@ -72,9 +69,9 @@ for(var i = 1; i< 13; i++);//make 12 apartments
 
     };
 
-    db.Residents.save(woman);    
+    db.Residents.save(woman);
 
-    signer = db.Residents.find({"firstName" : "Rhonda", "lastName" : "James"},{});//should return object id
+    signer = db.Residents.findOne({"firstName" : "Rhonda", "lastName" : "James"},{});//should return object id
 
     db.Leases.save(
         {
@@ -103,7 +100,7 @@ for(var i = 1; i< 13; i++);//make 12 apartments
      var dad =
     {
         "firstName" : "Leo",
-        "lastName" : Reindhart,
+        "lastName" : "Reindhart",
         "sex" :"male",
         "dateOfBirth" : new Date("1988-07-03"),
         "race" : "White",
@@ -121,7 +118,7 @@ for(var i = 1; i< 13; i++);//make 12 apartments
         "lastName" : "Reindhart",
         "sex" :"female",
         "dateOfBirth" : new Date("2013-04-09"),
-        "race" : "White",        
+        "race" : "White",
         "apartment" : 3,
         "timeIn" : [],
         "timeOut" : []
@@ -129,10 +126,10 @@ for(var i = 1; i< 13; i++);//make 12 apartments
     };
 
     db.Residents.save(mom);
-    db.Residents.save(dad); 
-    db.Residents.save(babyGirl);   
+    db.Residents.save(dad);
+    db.Residents.save(babyGirl);
 
-    signer = db.Residents.find({"firstName" : dad.firstName, "lastName" : dad.lastName},{});//should return object id
+    signer = db.Residents.findOne({"firstName" : dad.firstName, "lastName" : dad.lastName},{});//should return object id
 
     db.Leases.save(
         {
@@ -187,11 +184,11 @@ for(var i = 1; i< 13; i++);//make 12 apartments
         "timeOut" : []
 
     };
-    
 
-    db.Residents.save(woman);    
 
-    signer = db.Residents.find({"firstName" : older.firstName, "lastName" : older.lastName});//should return object id
+    db.Residents.save(woman);
+
+    signer = db.Residents.findOne({"firstName" : older.firstName, "lastName" : older.lastName});//should return object id
 
     db.Leases.save(
         {
@@ -205,20 +202,25 @@ for(var i = 1; i< 13; i++);//make 12 apartments
     //Add additional familes here if you keep the same format the residents will be added to the apartments list automatically
 
 //Add residents to apartments list
-var leases = db.Leases.find({"endDate" : {$gt: Date()}}).foreach(addResidents);//leases that havet expired 
+var leases = db.Leases.find({"endDate" : {$gt: Date()}}).toArray();//leases that havet expired
+
+for(var i = 0; i < leases.length; i++)
+{
+  addResidents(leases[i]);
+}
 function addResidents(lease)
 {
     //grab its apartment from database
-     var apartment = db.Apartment.find({"_id": lease.apartment})
+     var apartment = db.Apartment.findOne({"_id": lease.apartment})
      //grab array of people who now stay there
-     var residents = db.Residents.find({"apartment": lease.apartment},{"_id": 1 ,"firstName" : 1, "lastName" :1}).toArray();
+     var residents = db.Residents.findOne({"apartment": lease.apartment},{"_id": 1 ,"firstName" : 1, "lastName" :1}).toArray();
      //set that array up in the apt
      db.Apartment.update({"_id": lease.apartment}, {$set:{"residents": residents}})
 
      var firstTimeIn = lease.startDate;
      for(var i = 0; i < residents.length; i++)
      {
-        db.Residents.update({"_id" : residents[i]._id}, {$set:{"timeIn.0":firstTimeIn}});      
+        db.Residents.update({"_id" : residents[i]._id}, {$set:{"timeIn.0":firstTimeIn}});
      }
 }
 //
