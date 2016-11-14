@@ -18,10 +18,25 @@ Router.configure({
 });
 
 
-Router.route('/', function() {
-    this.render("home");
-});
+Router.route('/',
+    function() {
+        this.render("home");
+    },
+    {
+        title: 'Home'
+    }
+);
 
-Router.route("/admin", function() {
-    this.render('admin');
+Router.route('/admin',
+    function() {
+        this.render("admin");
+    },
+    {
+        title: 'Admin'
+    }
+);
+
+
+Router.onAfterAction(function() {
+    document.title = 'Big Brother Housing - ' + this.route.options.title;
 });
