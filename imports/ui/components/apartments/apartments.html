@@ -1,4 +1,4 @@
-<template name="apartments">
+<template name="apartmentsTable">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -9,13 +9,13 @@
         </thead>
         <tbody>
         {{#each apartments}}
-            {{> apartment}}
+            {{> apartmentRow}}
         {{/each}}
         </tbody>
     </table>
 </template>
 
-<template name="apartment">
+<template name="apartmentRow">
     <tr>
         <th scope="row">{{ _id }}</th>
         <td>

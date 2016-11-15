@@ -1,4 +1,4 @@
-<template name="leases">
+<template name="leasesTable">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -11,13 +11,13 @@
         </thead>
         <tbody>
         {{#each leases}}
-            {{> lease}}
+            {{> leaseRow}}
         {{/each}}
         </tbody>
     </table>
 </template>
 
-<template name="lease">
+<template name="leaseRow">
     <tr>
         <th scope="row">{{ apartment }}</th>
         <td>{{#if rent}}${{/if}}{{ rent }}</td>

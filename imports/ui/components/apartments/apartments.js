@@ -1,11 +1,11 @@
 import { Template } from 'meteor/templating';
 import { Apartments } from '../../../api/apartments/apartment';
 
-Template.apartments.onCreated(function onCreated() {
+Template.apartmentsTable.onCreated(function onCreated() {
     Meteor.subscribe('apartments');
 });
 
-Template.apartments.helpers({
+Template.apartmentsTable.helpers({
     apartments() {
         return Apartments.find({});
     },

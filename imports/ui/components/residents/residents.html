@@ -1,4 +1,4 @@
-<template name="residents">
+<template name="residentsTable">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -15,13 +15,13 @@
         </thead>
         <tbody>
         {{#each residents}}
-            {{> resident}}
+            {{> residentRow}}
         {{/each}}
         </tbody>
     </table>
 </template>
 
-<template name="resident">
+<template name="residentRow">
     <tr>
         <th scope="row">{{ id }}</th>
         <td>{{ firstName }}</td>
