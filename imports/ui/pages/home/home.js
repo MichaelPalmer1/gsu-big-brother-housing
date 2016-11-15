@@ -1,5 +1,5 @@
-import '../../layouts/residents/residents.html';
-import '../../layouts/residents/residents';
+import '../../components/residents/residents.html';
+import '../../components/residents/residents';
 
-import '../../layouts/apartments/apartments.html';
-import '../../layouts/apartments/apartments';
+import '../../components/apartments/apartments.html';
+import '../../components/apartments/apartments';

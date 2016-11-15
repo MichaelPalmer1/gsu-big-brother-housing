@@ -1,2 +1,2 @@
-import '../../layouts/leases/leases.html';
-import '../../layouts/leases/leases';
+import '../../components/leases/leases.html';
+import '../../components/leases/leases';
