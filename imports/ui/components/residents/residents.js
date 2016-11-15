@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Residents } from '../../../api/residents/residents';
+import './residents.html';
 
 Template.residentsTable.onCreated(function onCreated() {
     Meteor.subscribe('residents');
