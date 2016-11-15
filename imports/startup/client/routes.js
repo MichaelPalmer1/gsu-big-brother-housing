@@ -1,14 +1,9 @@
 import { Router } from 'meteor/iron:router';
 
-// import necessary templates
+// import layouts
 import '../../ui/layouts/main_layout/main.html';
-import '../../ui/pages/home/home.html';
-import '../../ui/pages/admin/admin.html';
-import '../../ui/pages/error/error.html';
-import '../../ui/pages/residents/listing/residents.html';
-import '../../ui/pages/residents/add/add_resident.html';
 
-// javascript files
+// import javascript files for each page
 import '../../ui/pages/home/home';
 import '../../ui/pages/admin/admin';
 import '../../ui/pages/error/error';

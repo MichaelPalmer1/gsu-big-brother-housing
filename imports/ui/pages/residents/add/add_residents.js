@@ -1,3 +1,1 @@
-/**
- * Created by charlesarvey on 11/15/16.
- */
+import './add_resident.html';
