@@ -1,5 +1,148 @@
 <template name="add_resident">
+    <h2>Add Resident</h2>
 
+     <div id="wizard" class="form_wizard wizard_horizontal">
+         <ul class="wizard_steps">
+             <li id="step1">
+                 <a href="#step-1">
+                     <span class="step_no">1</span>
+                     <span class="step_descr">
+                         Step 1<br />
+                         <small>Resident Details</small>
+                     </span>
+                 </a>
+             </li>
+             <li id="step2">
+                 <a href="#step-2">
+                     <span class="step_no">2</span>
+                     <span class="step_descr">
+                         Step 2<br />
+                         <small>Lease Details</small>
+                     </span>
+                 </a>
+             </li>
+         </ul>
+     </div>
 
+     <div id="step-1">
+       <form method="post" action="\submit" class="form-horizontal form-label-left">
+
+         <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span>
+           </label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+             <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+           </div>
+         </div>
+           <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+               </div>
+           </div>
+           <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <div id="gender" class="btn-group" data-toggle="buttons">
+                       <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                           <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
+                       </label>
+                       <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                           <input type="radio" name="gender" value="female"> Female
+                       </label>
+                   </div>
+               </div>
+           </div>
+           <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="date" id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required">
+               </div>
+           </div>
+            <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="race">Race<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="text" id="race" name="race" required="required" class="form-control col-md-7 col-xs-12">
+               </div>
+           </div>
+            <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">Occupation
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="text" id="occupation" name="occupation" required="required" class="form-control col-md-7 col-xs-12">
+               </div>
+           </div>
+            <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="salary">Salary
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="text" id="salary" name="salary" required="required" class="form-control col-md-7 col-xs-12">
+               </div>
+           </div>
+           <div class="form-group">
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="submit" value="Submit">
+               </div>
+           </div>
+       </form>
+
+     </div>
+    <div id="step-2">
+       <form method="post" action="\submit" class="form-horizontal form-label-left">
+
+         <div class="form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apt-num">Apt # <span class="required">*</span>
+           </label>
+           <div class="col-md-6 col-sm-6 col-xs-12">
+             <input type="text" id="apt-num" required="required" class="form-control col-md-7 col-xs-12">
+           </div>
+         </div>
+           <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rent">Rent <span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="text" id="rent" name="rent" required="required" class="form-control col-md-7 col-xs-12">
+               </div>
+           </div>
+             <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rent">Lease Start Date<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="date" id="start-date" name="start-date" required="required" class="form-control col-md-7 col-xs-12">
+               </div>
+           </div>
+            <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="race">Lease End Date<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="date" id="end-date" name="end-date" required="required" class="form-control col-md-7 col-xs-12">
+               </div>
+           </div>
+            <div class="form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="signer">Signer<span class="required">*</span>
+               </label>
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input type="text" id="signer" name="signer" required="required" class="form-control col-md-7 col-xs-12">
+               </div>
+           </div>
+           <div class="form-group">
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="submit" value="Submit">
+               </div>
+           </div>
+       </form>
+     </div>
+
+    <!-- jQuery Smart Wizard -->
+    <script>
+      $(document).ready(function() {
+        $('#step-2').hide();
+        $('#step1').click(function(){$('#step-1').show();$('#step-2').hide();});
+        $('#step2').click(function(){$('#step-2').show();$('#step-1').hide();});
+      });
+    </script>
 
 </template>
