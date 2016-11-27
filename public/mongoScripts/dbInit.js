@@ -25,7 +25,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "salary": 88000.00,
         "apartment" : 1,
         "timeIn" : [],
-        "timeOut" : []
+        "timeOut" : [],
+        "present": true
 
     };
     var son =
@@ -37,7 +38,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "race" : "Black",
         "apartment" : 1,
         "timeIn" : [],
-        "timeOut" : []
+        "timeOut" : [],
+        "present": true
     };
 
     db.Residents.save(mom);
@@ -65,7 +67,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "salary": 48000.00,
         "apartment" : 2,
         "timeIn" : [],
-        "timeOut" : []
+        "timeOut" : [],
+        "present": true
 
     };
 
@@ -94,7 +97,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "salary": 43000.00,
         "apartment" : 3,
         "timeIn" : [],
-        "timeOut" : []
+        "timeOut" : [],
+        "present": true
 
     };
      var dad =
@@ -108,7 +112,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "salary": 47000.00,
         "apartment" : 3,
         "timeIn" : [],
-        "timeOut" : []
+        "timeOut" : [],
+        "present": true
 
     };
 
@@ -121,7 +126,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "race" : "White",
         "apartment" : 3,
         "timeIn" : [],
-        "timeOut" : []
+        "timeOut" : [],
+        "present": true
 
     };
 
@@ -152,7 +158,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "salary": 29000.00,
         "apartment" : 4,
         "timeIn" : [],
-        "timeOut" : []
+        "timeOut" : [],
+        "present": true
 
     };
         var younger =
@@ -166,7 +173,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "salary": 32000.00,
         "apartment" : 4,
         "timeIn" : [],
-        "timeOut" : []
+        "timeOut" : [],
+        "present": true
 
     };
 
@@ -181,7 +189,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "salary": 40000.00,
         "apartment" : 4,
         "timeIn" : [],
-        "timeOut" : []
+        "timeOut" : [],
+        "present": true
 
     };
 
@@ -217,7 +226,7 @@ function addResidents(lease)
      //grab array of people who now stay there
      var residents = db.Residents.findOne({"apartment": lease.apartment},{"_id": 1 ,"firstName" : 1, "lastName" :1}).toArray();
      //set that array up in the apt
-     db.Apartment.update({"_id": lease.apartment}, {$set:{"residents": residents}})
+     db.Apartment.update({"_id": lease.apartment}, {$set:{"residents": residents}});
 
      var firstTimeIn = lease.startDate;
      for(var i = 0; i < residents.length; i++)
