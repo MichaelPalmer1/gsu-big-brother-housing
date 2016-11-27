@@ -1,3 +1,4 @@
 import './home.html';
 
-import '../../components/apartments/apartments';
+import '../../components/residentsPresent/residentsPresent';
+import '../../components/residentStats/residentStats';

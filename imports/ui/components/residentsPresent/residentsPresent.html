@@ -1,0 +1,28 @@
+<template name="residentsPresent">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Sex</th>
+            <th>Present / Absent</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each residents}}
+            {{> residentPresentRow}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="residentPresentRow">
+    <tr>
+        <th scope="row">{{ id }}</th>
+        <td>{{ firstName }}</td>
+        <td>{{ lastName }}</td>
+        <td>{{ sex }}</td>
+        <td>Present ?</td>
+    </tr>
+</template>
