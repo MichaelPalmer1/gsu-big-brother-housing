@@ -26,12 +26,13 @@ Template.residentPresentRow.onRendered(function () {
 
 Template.residentPresentRow.events({
     'click .js-switch': function (event) {
-        console.log(this._id);
-        console.log(this.present);
+
+        var is_present = this.present;
+        console.log(is_present);
 
         Residents.update(this._id, {
             $set: {present: !this.present}
-        })
+        });
     }
 });
 
