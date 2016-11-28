@@ -1,116 +1,122 @@
 <template name="main">
 
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> Big Brother Housing </title>
+        <title> Big Brother Housing </title>
 
-    <!-- Bootstrap -->
-    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- bootstrap-progressbar -->
-    <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- jVectorMap -->
-    <link href="/production/css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
+        <!-- Bootstrap -->
+        <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- iCheck -->
+        <link href="/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+        <!-- Switchery -->
+        <link href="/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+        <!-- bootstrap-progressbar -->
+        <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+        <!-- jVectorMap -->
+        <link href="/production/css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
 
-    <!-- Custom Theme Style -->
-    <link href="/build/css/custom.min.css" rel="stylesheet">
+        <!-- Custom Theme Style -->
+        <link href="/build/css/custom.min.css" rel="stylesheet">
 
 
-  </head>
+    </head>
 
-  <body class="nav-md">
+    <body class="nav-md">
     <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="/" class="site_title"><i class="fa fa-eye"></i> <span>Big Brother</span></a>
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="/" class="site_title"><i class="fa fa-eye"></i> <span>Big Brother</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <br/>
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>Menu</h3>
+                            <ul class="nav side-menu">
+
+                                <li><a href="/"><i class="fa fa-tachometer"></i> Dashboard </a></li>
+                                <li><a><i class="fa fa-home"></i> Residents <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/residents">All Residents</a></li>
+                                        <li><a href="/residents/add">Add a Resident</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/admin"><i class="fa fa-lock"></i> Admin </a></li>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+                    <!-- /sidebar menu -->
+
+
+                    <!-- /menu footer buttons -->
+                </div>
             </div>
 
-            <div class="clearfix"></div>
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <!--<div class="nav toggle">-->
+                        <!--<a id="menu_toggle"><i class="fa fa-bars"></i></a>-->
+                        <!--</div>-->
 
-            <br />
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <img src="/images/user.png"/>
+                                </a>
 
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>Menu</h3>
-                <ul class="nav side-menu">
+                            </li>
 
-                    <li><a href="/"><i class="fa fa-tachometer"></i> Dashboard </a></li>
-                    <li><a><i class="fa fa-home"></i> Residents <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                          <li><a href="/residents">All Residents</a></li>
-                          <li><a href="/residents/add">Add a Resident</a></li>
                         </ul>
-                      </li>
-                    <li><a href="/admin"><i class="fa fa-lock"></i> Admin </a></li>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
 
-                </ul>
-              </div>
+            <!-- page content -->
+            <div class="right_col" role="main">
 
+                {{> yield}}
 
             </div>
-            <!-- /sidebar menu -->
+            <!-- /page content -->
 
 
-            <!-- /menu footer buttons -->
-          </div>
-        </div>
-
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav class="" role="navigation">
-              <!--<div class="nav toggle">-->
-                <!--<a id="menu_toggle"><i class="fa fa-bars"></i></a>-->
-              <!--</div>-->
-
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="/images/user.png"/>
-                  </a>
-
-                </li>
-
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
-
-        <!-- page content -->
-        <div class="right_col" role="main">
-
-            {{> yield}}
+            <footer>
+                <div class="pull-right">
+                    CSCI 5436 - Distributed Web project by: Charles Arvey, David Taylor, Shannon Sergeant, Garrett
+                    Edwards, & Michael Palmer.
+                </div>
+                <div class="clearfix"></div>
+            </footer>
 
         </div>
-        <!-- /page content -->
-
-
-        <footer>
-          <div class="pull-right">
-            CSCI 5436 - Distributed Web project by: Charles Arvey, David Taylor, Shannon Sergeant, Garrett Edwards, & Michael Palmer.
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-
-      </div>
     </div>
 
     <!-- jQuery -->
     <script src="/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Switchery -->
+    <script src="../vendors/switchery/dist/switchery.min.js"></script>
     <!-- FastClick -->
     <script src="/vendors/fastclick/lib/fastclick.js"></script>
     <script src="/vendors/nprogress/nprogress.js"></script>
@@ -119,7 +125,6 @@
     <!-- Custom Theme Scripts -->
     <script src="/build/js/custom.min.js"></script>
 
-
-  </body>
+    </body>
 
 </template>

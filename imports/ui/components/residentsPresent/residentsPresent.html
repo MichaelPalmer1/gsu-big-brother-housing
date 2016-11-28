@@ -18,11 +18,15 @@
 </template>
 
 <template name="residentPresentRow">
-    <tr>
+    <tr data-mongoid={{ _id }}>
         <th scope="row">{{ id }}</th>
         <td>{{ firstName }}</td>
         <td>{{ lastName }}</td>
         <td>{{ sex }}</td>
-        <td>Present ?</td>
+        <td>
+            <label>
+                Present: <input type="checkbox" class="js-switch" {{ isChecked }}/>
+            </label>
+        </td>
     </tr>
 </template>
