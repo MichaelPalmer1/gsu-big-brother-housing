@@ -52,7 +52,8 @@ Template.residentStats.helpers({
         });
 
         Meteor.defer(function() {
-            charts.presence = charts.presence || new Chart('presenceChart', chartOptions);
+            charts.presence = new Chart('presenceChart', chartOptions);
+            updateChart();
         });
     },
     demographicChart: function() {
@@ -86,7 +87,8 @@ Template.residentStats.helpers({
         });
 
         Meteor.defer(function() {
-            charts.demographic = charts.demographic || new Chart('demographicChart', chartOptions);
+            charts.demographic = new Chart('demographicChart', chartOptions);
+            updateChart();
         });
     },
     genderChart: function() {
@@ -120,7 +122,8 @@ Template.residentStats.helpers({
         });
 
         Meteor.defer(function() {
-            charts.gender = charts.gender || new Chart('genderChart', chartOptions);
+            charts.gender = new Chart('genderChart', chartOptions);
+            updateChart();
         });
     }
 });
