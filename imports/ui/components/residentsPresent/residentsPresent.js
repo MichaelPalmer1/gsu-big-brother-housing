@@ -20,7 +20,6 @@ Template.residentsPresent.helpers({
 // ------------
 
 Template.residentPresentRow.onRendered(function () {
-
     var elem = this.find('.js-switch');
     var init = new Switchery(elem);
 });
