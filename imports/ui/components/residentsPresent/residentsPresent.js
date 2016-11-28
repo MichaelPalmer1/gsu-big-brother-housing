@@ -37,7 +37,7 @@ Template.residentPresentRow.events({
         console.log(is_present);
 
         TimeStamp.insert({
-            'status': this.present,
+            'arriving': !this.present,
             'time': new Date()
         });
 

@@ -2,9 +2,13 @@
 <template name="home">
     <h3>Big Brother Admin</h3>
 
-    {{> residentStats }}
+    <div class="row">
+        {{> residentStats }}
+    </div>
 
-    <h2>Residents Present</h2>
-    {{> residentsPresent }}
+    <div class="row">
+        <h2>Residents Present</h2>
+        {{> residentsPresent }}
+    </div>
 
 </template>

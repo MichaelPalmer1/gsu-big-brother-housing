@@ -17,6 +17,8 @@ import '../../ui/pages/error/error';
 import '../../ui/pages/residents/add/add_residents';
 import '../../ui/pages/residents/listing/residents';
 
+import '../../ui/pages/loading/loading';
+
 
 Router.configure({
    layoutTemplate: "main",
@@ -38,7 +40,12 @@ Router.route('/admin',
         this.render("admin");
     },
     {
-        title: 'Admin'
+        title: 'Admin',
+        //loadingTemplate: 'loading',
+        //waitOn: function() {
+        //    console.log("waiting");
+        //    return Meteor.subscribe('TimeStamp');
+        //}
     }
 );
 
