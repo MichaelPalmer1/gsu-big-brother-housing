@@ -1,5 +1,12 @@
 import { Router } from 'meteor/iron:router';
 
+// global css
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// global libraries
+import 'jquery/dist/jquery.min';
+import 'bootstrap/dist/js/bootstrap.min';
+
 // import layouts
 import '../../ui/layouts/main_layout/main.html';
 

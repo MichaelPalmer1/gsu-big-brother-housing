@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Residents } from '../../../api/residents/residents';
-import Chart from 'chart.js/dist/Chart';
+import Chart from 'chart.js/dist/Chart.min';
 import './residentStats.html';
 import './residentStats.css';
 
