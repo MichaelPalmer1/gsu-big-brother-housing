@@ -16,7 +16,8 @@ Template.residentStats.helpers({
         return Residents.find({'present': false}).count();
     },
     percent_present: function () {
-        return (Residents.find({'present': true}).count() / Residents.find().count()) * 100;
+        var percent = (Residents.find({'present': true}).count() / Residents.find().count()) * 100;
+        return percent.toFixed(2);
     },
     presenceChart: function() {
         let chartOptions = {
