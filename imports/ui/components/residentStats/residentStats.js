@@ -1,9 +1,14 @@
 import { Template } from 'meteor/templating';
-import { Tracker } from 'meteor/tracker';
 import { Residents } from '../../../api/residents/residents';
 import Chart from 'chart.js/dist/Chart';
 import './residentStats.html';
 import './residentStats.css';
+
+let charts = {
+    presence: null,
+    demographic: null,
+    gender: null
+};
 
 Template.residentStats.helpers({
     resident_count: function () {
@@ -23,10 +28,7 @@ Template.residentStats.helpers({
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [
-                        Residents.find({'present': true}).count(),
-                        Residents.find({'present': false}).count(),
-                    ],
+                    data: [0, 0],
                     backgroundColor: ['#26B99A', '#455C73'],
                     label: 'Resident Presence'
                 }],
@@ -34,9 +36,22 @@ Template.residentStats.helpers({
             }
         };
 
+        function updateChart() {
+            if (!charts.presence)
+                return;
+            charts.presence.data.datasets[0].data[0] = Residents.find({present: true}, {reactive: false}).count();
+            charts.presence.data.datasets[0].data[1] = Residents.find({present: false}, {reactive: false}).count();
+            charts.presence.update();
+        }
+
+        Residents.find({present: true}).observeChanges({
+            added: updateChart,
+            changed: updateChart,
+            removed: updateChart
+        });
+
         Meteor.defer(function() {
-            window.chart = window.chart || {};
-            window.chart.presenceChart = new Chart('presenceChart', chartOptions);
+            charts.presence = charts.presence || new Chart('presenceChart', chartOptions);
         });
     },
     demographicChart: function() {
@@ -44,11 +59,7 @@ Template.residentStats.helpers({
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [
-                        Residents.find({race: 'White'}).count(),
-                        Residents.find({race: 'Asian'}).count(),
-                        Residents.find({race: 'Black'}).count()
-                    ],
+                    data: [0, 0, 0],
                     backgroundColor: ['#26B99A', '#455C73', '#36A2EB'],
                     label: 'Resident Demographics'
                 }],
@@ -56,9 +67,25 @@ Template.residentStats.helpers({
             }
         };
 
+        function updateChart() {
+            if (!charts.demographic)
+                return;
+            let data = charts.demographic.data.datasets[0].data;
+            let labels = charts.demographic.data.labels;
+            for (let i = 0; i < data.length; i++) {
+                data[i] = Residents.find({race: labels[i]}, {reactive: false}).count();
+            }
+            charts.demographic.update();
+        }
+
+        Residents.find({race: { $in: ['White', 'Asian', 'Black'] }}).observeChanges({
+            added: updateChart,
+            changed: updateChart,
+            removed: updateChart
+        });
+
         Meteor.defer(function() {
-            window.chart = window.chart || {};
-            window.chart.demographicChart = new Chart('demographicChart', chartOptions);
+            charts.demographic = charts.demographic || new Chart('demographicChart', chartOptions);
         });
     },
     genderChart: function() {
@@ -66,10 +93,7 @@ Template.residentStats.helpers({
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [
-                        Residents.find({sex: 'male'}).count(),
-                        Residents.find({sex: 'female'}).count()
-                    ],
+                    data: [0, 0],
                     backgroundColor: ['#26B99A', '#455C73'],
                     label: 'Resident Genders'
                 }],
@@ -77,23 +101,25 @@ Template.residentStats.helpers({
             }
         };
 
+        function updateChart() {
+            if (!charts.gender)
+                return;
+            let data = charts.gender.data.datasets[0].data;
+            let labels = charts.gender.data.labels;
+            for (let i = 0; i < data.length; i++) {
+                data[i] = Residents.find({sex: labels[i].toLowerCase()}, {reactive: false}).count();
+            }
+            charts.gender.update();
+        }
+
+        Residents.find({sex: { $in: ['male', 'female'] }}).observeChanges({
+            added: updateChart,
+            changed: updateChart,
+            removed: updateChart
+        });
+
         Meteor.defer(function() {
-            window.chart = window.chart || {};
-            window.chart.genderChart = new Chart('genderChart', chartOptions);
+            charts.gender = charts.gender || new Chart('genderChart', chartOptions);
         });
     }
 });
-
-Template.residentStats.rendered = function() {
-    Tracker.autorun(function() {
-        if (window.chart.presenceChart) {
-            window.chart.presenceChart.update();
-        }
-        if (window.chart.demographicChart) {
-            window.chart.demographicChart.update();
-        }
-        if (window.chart.genderChart) {
-            window.chart.genderChart.update();
-        }
-    });
-};
