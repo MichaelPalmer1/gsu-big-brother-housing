@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Residents } from '../../../api/residents/residents';
+import { TimeStamp } from '../../../api/timestamp/timestamp';
 import './residentsPresent.html';
 
 Template.residentsPresent.onCreated(function onCreated() {
@@ -24,15 +25,22 @@ Template.residentPresentRow.onRendered(function () {
     var init = new Switchery(elem);
 });
 
+
 Template.residentPresentRow.events({
     'click .js-switch': function (event) {
-
-        var is_present = this.present;
-        console.log(is_present);
 
         Residents.update(this._id, {
             $set: {present: !this.present}
         });
+
+        var is_present = this.present;
+        console.log(is_present);
+
+        TimeStamp.insert({
+            'status': this.present,
+            'time': new Date()
+        });
+
     }
 });
 
