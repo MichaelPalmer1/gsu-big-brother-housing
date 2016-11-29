@@ -86,7 +86,7 @@ for(var i = 1; i< 13; i++)//make 12 apartments
     });
 
 //Family 3, Mom, Dad, daughter
-    var mom =
+    var mommy =
     {
         "firstName" : "Ana",
         "lastName" : "Reindhart",
@@ -127,12 +127,11 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "apartment" : 3,
         "timeIn" : [],
         "timeOut" : [],
-        "present": true,
-        "salary": 45000.00
+        "present": true
 
     };
 
-    db.Residents.save(mom);
+    db.Residents.save(mommy);
     db.Residents.save(dad);
     db.Residents.save(babyGirl);
 
@@ -214,7 +213,7 @@ for(var i = 1; i< 13; i++)//make 12 apartments
     //Add additional familes here if you keep the same format the residents will be added to the apartments list automatically
 
 //Add residents to apartments list
-var leases = db.Leases.find({"endDate" : {$gt: Date()}}).toArray();//leases that havet expired
+var leases = db.Leases.find({"endDate" : {$gt: new Date()}}).toArray();//leases that havet expired
 
 for(var i = 0; i < leases.length; i++)
 {
@@ -235,4 +234,533 @@ function addResidents(lease)
         db.Residents.update({"_id" : residents[i]._id}, {$set:{"timeIn.0":firstTimeIn}});
      }
 }
-//
+//Employees Collection
+var dylan =
+{
+    "firstName" : "dylan",
+    "lastName" : "Sprouse",
+    "sex" :"male",
+    "dateOfBirth" : new Date("1992-04-08"),
+    "race" : "White",
+    "position" : "front desk",
+    "previousOccupation":"child actor"
+};
+var cole =
+{
+    "firstName" : "cole",
+    "lastName" : "Sprouse",
+    "sex" :"male",
+    "dateOfBirth" : new Date("1992-04-08"),
+    "race" : "White",
+    "position" : "front desk",
+    "previousOccupation":"child actor"
+};
+db.Employee.insert(dylan);
+db.Employee.insert(cole);
+//Add leasers to leases
+var allLeases =   db.Leases.find({}).toArray();//return all leases
+var dylansID = db.Leases.findOne({"firstName": dylan.firstName});
+for(var i = 0 ; i < allLeases.length; i ++)
+{
+    //let dylan sign all the leases since he is the big brother
+    db.Leases.update({"_id":allLeases[i]._id}, {$set:{"leaser":dylansID}})
+}
+
+//AddTimes to TimeStamp collections
+
+//scheduled events for each resident will triger a timestamp to be added
+//scheduled events will be on based on the days of the week, e.g. genji goes to work on monday at 8
+//when this script is ran it will use the date as focal point and simulate the prior 4 days
+var todaysDate = new Date()
+var today = todaysDate.getDay(); //sunday = 0 saturday = 6
+var milisecondsPerDay = 86400*1000;
+
+for(var i = 0; i < 4; i ++)
+{
+    if(today = 0)//if today is sunday manually reset to saturday
+    {
+        today = 6;
+    }
+    else
+    {
+        today--;
+    }
+    simulateDay(i, today);
+
+}
+
+
+function simulateDay(itteration, today)//simulates the timestamps of one day of the week and the date is based on the current ate
+{
+
+    var date = todaysDate.getTime();
+    date -= (itteration*milisecondsPerDay);// subtract a number of days from current day to match var today
+    var timeStamp = new Date();
+    timeStamp.setTime(date);//create date and day for time stamp
+
+    //pass the day and itteration to each of the four family in this script
+    family1Schedule(timeStamp);
+    family2Schedule(timeStamp, date);
+    family3Schedule(timeStamp);
+    family4Schedule(timeStamp);
+}
+function family1Schedule(timeStamp)
+{
+    var momId = db.Residents.findOne({"firstName": mom.firstName}, {"firstName:1"});// I just want the _id
+    var sonId = db.Residents.findOne({"firstName": son.firstName}, {"firstName:1"});
+
+    if (today >= 1 || today < 6)//monday through friday
+    {
+        //mom leaves for work at 8am; son leaves for school at 7
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(8)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(17)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": sonId._id,
+                "name": sonId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(7)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": sonId._id,
+                "name": sonId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(16)
+            });
+        //if its thursday they get pizza together at 7
+        if(today == 4)
+        {
+            db.TimeStamp.save(
+                {
+                    "residentID": momId._id,
+                    "name": momId.firstName,
+                    "arriving": false,
+                    "timeStamp": timeStamp.setHours(19)
+                });
+            db.TimeStamp.save(
+                {
+                    "residentID": sonId._id,
+                    "name": sonId.firstName,
+                    "arriving": false,
+                    "timeStamp": timeStamp.setHours(19)
+                });
+
+            db.TimeStamp.save(
+                {
+                    "residentID": momId._id,
+                    "name": momId.firstName,
+                    "arriving": true,
+                    "timeStamp": timeStamp.setHours(21)
+                });
+            db.TimeStamp.save(
+                {
+                    "residentID": sonId._id,
+                    "name": sonId.firstName,
+                    "arriving": true,
+                    "timeStamp": timeStamp.setHours(21)
+                });
+        }
+    }
+    //Saturday son watch cartoons all day and video games. mom goes shopping
+    if(today == 6)
+    {
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(12)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(17)
+            });
+    }
+    //sundays they go to church and go out to dinner
+    if(today == 7)
+    {
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(8)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(14)
+            });
+
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(18)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(20)
+            });
+
+        db.TimeStamp.save(
+            {
+                "residentID": sonId._id,
+                "name": sonId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(8)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": sonId._id,
+                "name": sonId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(14)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": sonId._id,
+                "name": sonId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(18)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": sonId._id,
+                "name": sonId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(20)
+            });
+    }
+}
+function family2Schedule(timeStamp, date)
+{
+    var womanId = db.Residents.findOne({"firstName": woman.firstName}, {"firstName:1"});
+    //monday through friday she goes to campus to learn something
+    if (today >= 1 || today < 6)
+    {
+        db.TimeStamp.save(
+            {
+                "residentID": womanId._id,
+                "name": womanId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(12)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": womanId._id,
+                "name": womanId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(16)
+            });
+    }
+        if(today== 0 || today>3  ) // thursday - sunday she works
+        {
+
+                db.TimeStamp.save(
+                    {
+                        "residentID": womanId._id,
+                        "name": womanId.firstName,
+                        "arriving": false,
+                        "timeStamp": timeStamp.setHours(21)
+                    });
+                db.TimeStamp.save(
+                    {
+                        "residentID": womanId._id,
+                        "name": womanId.firstName,
+                        "arriving": true,
+                        "timeStamp": timeStamp.setHours(26)
+                    });
+                timeStamp.setTime(date); //reset timestamp
+        }
+    //she schools all day and works all night she has no time for anything else
+}
+
+function family3Schedule(timeStamp)
+{
+    var momId = db.Residents.findOne({"firstName": mommy.firstName}, {"firstName:1"});
+    var dadId =  db.Residents.findOne({"firstName": dad.firstName}, {"firstName:1"});
+    var baby =  db.Residents.findOne({"firstName": babyGirl.firstName}, {"firstName:1"});
+    //monday through friday the parents work and baby is in daycare
+
+    if (today >= 1 || today < 6)
+    {
+        db.TimeStamp.save(
+            {
+                "residentID": dad._id,
+                "name": dad.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(5)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(7)
+            });
+        db.TimeStamp.save(
+        {
+            "residentID": baby._id,
+            "name": baby.firstName,
+            "arriving": false,
+            "timeStamp": timeStamp.setHours(7)
+        });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(8)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(11)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": dad._id,
+                "name": dad.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(16)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": baby._id,
+                "name": baby.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(16)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(22)
+            });
+    }
+    //saturday is date night and the baby stays at home with Big Brother
+    if(today == 6)
+    {
+        db.TimeStamp.save(
+            {
+                "residentID": dad._id,
+                "name": dad.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(19)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(19)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": dad._id,
+                "name": dad.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(23)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": momId._id,
+                "name": momId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(23)
+            });
+    }
+    //sunday they stay in the housing and picnic in there yard or something
+}
+function  family4Schedule(timeStamp) {
+    var olderId = db.Residents.findOne({"firstName": older.firstName}, {"firstName:1"});
+    var youngerId = db.Residents.findOne({"firstName": younger.firstName}, {"firstName:1"});
+    var friendId = db.Residents.findOne({"firstName": friend.firstName}, {"firstName:1"});
+
+    //weekdays the brothers work and the friend trains twice a day
+    if (today >= 1 || today < 6)
+        {
+            db.TimeStamp.save(
+                {
+                    "residentID": olderId._id,
+                    "name": olderId.firstName,
+                    "arriving": false,
+                    "timeStamp": timeStamp.setHours(9)
+                });
+            db.TimeStamp.save(
+                {
+                    "residentID": olderId._id,
+                    "name": olderId.firstName,
+                    "arriving": true,
+                    "timeStamp": timeStamp.setHours(17)
+                });
+            db.TimeStamp.save(
+                {
+                    "residentID": youngerId._id,
+                    "name": youngerId.firstName,
+                    "arriving": false,
+                    "timeStamp": timeStamp.setHours(4)
+                });
+            db.TimeStamp.save(
+                {
+                    "residentID": youngerId._id,
+                    "name": youngerId.firstName,
+                    "arriving": true,
+                    "timeStamp": timeStamp.setHours(15)
+
+                });
+            db.TimeStamp.save(
+                {
+                    "residentID": friendId._id,
+                    "name": friendId.firstName,
+                    "arriving": false,
+                    "timeStamp": timeStamp.setHours(5)
+                });
+            db.TimeStamp.save(
+                {
+                    "residentID": friendId._id,
+                    "name": friendId.firstName,
+                    "arriving": true,
+                    "timeStamp": timeStamp.setHours(8)
+
+                });
+
+            db.TimeStamp.save(
+                {
+                    "residentID": friendId._id,
+                    "name": friendId.firstName,
+                    "arriving": false,
+                    "timeStamp": timeStamp.setHours(2)
+                });
+            db.TimeStamp.save(
+                {
+                    "residentID": friendId._id,
+                    "name": friendId.firstName,
+                    "arriving": true,
+                    "timeStamp": timeStamp.setHours(4)
+
+                });
+        }
+
+    if(today == 2 || today == 4)// tues. and thurs. pizzaeria night aka cheat days
+    {
+        db.TimeStamp.save(
+            {
+                "residentID": olderId._id,
+                "name": olderId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(19)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": olderId._id,
+                "name": olderId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(21)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": youngerId._id,
+                "name": youngerId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(19)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": youngerId._id,
+                "name": youngerId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(21)
+
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": friendId._id,
+                "name": friendId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(19)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": friendId._id,
+                "name": friendId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(21)
+
+            });
+    }
+    //saturdays they go watch the friend fight and come back  sunday noon  and hibernate
+    if(today == 6)
+    {
+        db.TimeStamp.save(
+            {
+                "residentID": olderId._id,
+                "name": olderId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(6)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": olderId._id,
+                "name": olderId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(30)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": youngerId._id,
+                "name": youngerId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(6)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": youngerId._id,
+                "name": youngerId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(30)
+
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": friendId._id,
+                "name": friendId.firstName,
+                "arriving": false,
+                "timeStamp": timeStamp.setHours(6)
+            });
+        db.TimeStamp.save(
+            {
+                "residentID": friendId._id,
+                "name": friendId.firstName,
+                "arriving": true,
+                "timeStamp": timeStamp.setHours(30)
+
+            });
+    }
+}
