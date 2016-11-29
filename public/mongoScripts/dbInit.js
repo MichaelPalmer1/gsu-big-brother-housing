@@ -127,7 +127,8 @@ for(var i = 1; i< 13; i++)//make 12 apartments
         "apartment" : 3,
         "timeIn" : [],
         "timeOut" : [],
-        "present": true
+        "present": true,
+        "salary": 45000.00
 
     };
 
