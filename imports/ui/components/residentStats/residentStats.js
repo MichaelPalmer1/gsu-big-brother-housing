@@ -137,8 +137,7 @@ Template.residentStats.helpers({
     popularTimesChart: function () {
 
         var hour_labels = [];
-        for (var i = 0; i < 24; i++)
-        {
+        for (var i = 0; i < 24; i++) {
             hour_labels.push(i);
         }
 
@@ -156,28 +155,41 @@ Template.residentStats.helpers({
         console.log(hour_frequencies_raw);
 
 
+        //for (var [key, value] of Object.entries(hour_frequencies_raw)) {
+        //    var data = [];
+        //    for (var i = 0; i < 24; i++)
+        //        data.push(null);
+        //
+        //    data[key] = value;
+        //
+        //    hour_frequencies.push({
+        //        data: data,
+        //        label: parseInt(key),
+        //        backgroundColor: '#26B99A',
+        //        barPercentage: 1
+        //    });
+        //}
+        var chart_data = [];
+        for (var i = 0; i < 24; i++)
+            chart_data.push(0);
+
         for (var [key, value] of Object.entries(hour_frequencies_raw)) {
-            var data = [];
-            for (var i = 0; i < 24; i++)
-                data.push(null);
-
-            data[key] = value;
-
-            hour_frequencies.push({
-                data: data,
-                label: parseInt(key),
-                backgroundColor: '#26B99A',
-                barPercentage: 1
-            });
+            chart_data[key] = value;
         }
 
-        console.log(hour_frequencies);
+        console.log(chart_data);
 
         let chartOptions = {
-            type: 'bar',
+            type: 'line',
             data: {
-                datasets: hour_frequencies,
                 labels: hour_labels,
+                datasets: [
+                    {
+                        label: 'hours',
+                        data: chart_data,
+                        backgroundColor: '#26B99A'
+                    }
+                ]
             },
             options: {
                 legend: {
@@ -191,10 +203,10 @@ Template.residentStats.helpers({
                 return;
 
             // update this
-            //let data = charts.popularTimes.data.datasets[0].data;
-            //let labels = charts.popularTimes.data.labels;
+            let data = charts.popularTimes.data.datasets[0].data;
+            let labels = charts.popularTimes.data.labels;
             //for (let i = 0; i < data.length; i++) {
-            //    data[i] = Residents.find({sex: labels[i].toLowerCase()}, {reactive: false}).count();
+                //data[i] = TimeStamp.find(}, {reactive: false}).count();
             //}
             //console.log(charts.popularTimes.data);
             charts.popularTimes.update();
@@ -208,7 +220,7 @@ Template.residentStats.helpers({
 
         Meteor.defer(function () {
             charts.popularTimes = new Chart('popularTimes', chartOptions);
-            //updateChart();
+            updateChart();
         });
     }
 
