@@ -36,61 +36,60 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="x_panel" style="height: 434px; overflow: auto;">
+                <div class="x_title">
+                    <h2>Resident Presence</h2>
 
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="x_panel" style="max-height: 273px; overflow: auto;">
-            <div class="x_title">
-                <h2>Resident Presence</h2>
-
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <canvas id="presenceChart">{{presenceChart}}</canvas>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <canvas id="presenceChart">{{presenceChart}}</canvas>
+                </div>
             </div>
         </div>
-    </div>
 
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel" style="height: 434px; overflow: hidden;">
+                <div class="x_title">
+                    <h2>Present Residents with Highest Salaries
+                        <!--<small>basic table subtitle</small>-->
+                    </h2>
 
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="x_panel" style="max-height: 273px; overflow: hidden;">
-            <div class="x_title">
-                <h2>Present Residents with Highest Salaries
-                    <!--<small>basic table subtitle</small>-->
-                </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
 
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Salary</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {{#each topResidents}}
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>{{ count }}</td>
-                            <td>{{ lastName }}</td>
-                            <td>{{ firstName }}</td>
-                            <td>{{ salary }}</td>
+                            <th>#</th>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Salary</th>
                         </tr>
-                    {{/each}}
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                        {{#each topResidents}}
+                            <tr>
+                                <td>{{ count }}</td>
+                                <td>{{ lastName }}</td>
+                                <td>{{ firstName }}</td>
+                                <td>{{ salary }}</td>
+                            </tr>
+                        {{/each}}
 
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="x_panel" style="max-height: 273px; overflow: auto;">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="x_panel" style="height: 434px; overflow: auto;">
             <div class="x_title">
                 <h2>Resident Demographics</h2>
 
@@ -100,6 +99,7 @@
                 <canvas id="demographicChart">{{demographicChart}}</canvas>
             </div>
         </div>
+    </div>
     </div>
 
 </template>
