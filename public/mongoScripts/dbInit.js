@@ -224,7 +224,7 @@ function addResidents(lease)
     //grab its apartment from database
      var apartment = db.Apartment.findOne({"_id": lease.apartment})
      //grab array of people who now stay there
-     var residents = db.Residents.findOne({"apartment": lease.apartment},{"_id": 1 ,"firstName" : 1, "lastName" :1}).toArray();
+     var residents = db.Residents.find({"apartment": lease.apartment},{"_id": 1 ,"firstName" : 1, "lastName" :1}).toArray();
      //set that array up in the apt
      db.Apartment.update({"_id": lease.apartment}, {$set:{"residents": residents}});
 
@@ -259,7 +259,7 @@ db.Employee.insert(dylan);
 db.Employee.insert(cole);
 //Add leasers to leases
 var allLeases =   db.Leases.find({}).toArray();//return all leases
-var dylansID = db.Leases.findOne({"firstName": dylan.firstName});
+var dylansID = db.Employee.findOne({"firstName": dylan.firstName});
 for(var i = 0 ; i < allLeases.length; i ++)
 {
     //let dylan sign all the leases since he is the big brother
@@ -306,8 +306,8 @@ function simulateDay(itteration, today)//simulates the timestamps of one day of 
 }
 function family1Schedule(timeStamp)
 {
-    var momId = db.Residents.findOne({"firstName": mom.firstName}, {"firstName:1"});// I just want the _id
-    var sonId = db.Residents.findOne({"firstName": son.firstName}, {"firstName:1"});
+    var momId = db.Residents.findOne({"firstName": mom.firstName}, {"firstName": 1});// I just want the _id
+    var sonId = db.Residents.findOne({"firstName": son.firstName}, {"firstName": 1});
 
     if (today >= 1 || today < 6)//monday through friday
     {
@@ -457,7 +457,7 @@ function family1Schedule(timeStamp)
 }
 function family2Schedule(timeStamp, date)
 {
-    var womanId = db.Residents.findOne({"firstName": woman.firstName}, {"firstName:1"});
+    var womanId = db.Residents.findOne({"firstName": woman.firstName}, {"firstName": 1});
     //monday through friday she goes to campus to learn something
     if (today >= 1 || today < 6)
     {
@@ -500,9 +500,9 @@ function family2Schedule(timeStamp, date)
 
 function family3Schedule(timeStamp)
 {
-    var momId = db.Residents.findOne({"firstName": mommy.firstName}, {"firstName:1"});
-    var dadId =  db.Residents.findOne({"firstName": dad.firstName}, {"firstName:1"});
-    var baby =  db.Residents.findOne({"firstName": babyGirl.firstName}, {"firstName:1"});
+    var momId = db.Residents.findOne({"firstName": mommy.firstName}, {"firstName": 1});
+    var dadId =  db.Residents.findOne({"firstName": dad.firstName}, {"firstName": 1});
+    var baby =  db.Residents.findOne({"firstName": babyGirl.firstName}, {"firstName": 1});
     //monday through friday the parents work and baby is in daycare
 
     if (today >= 1 || today < 6)
@@ -599,9 +599,9 @@ function family3Schedule(timeStamp)
     //sunday they stay in the housing and picnic in there yard or something
 }
 function  family4Schedule(timeStamp) {
-    var olderId = db.Residents.findOne({"firstName": older.firstName}, {"firstName:1"});
-    var youngerId = db.Residents.findOne({"firstName": younger.firstName}, {"firstName:1"});
-    var friendId = db.Residents.findOne({"firstName": friend.firstName}, {"firstName:1"});
+    var olderId = db.Residents.findOne({"firstName": older.firstName}, {"firstName": 1});
+    var youngerId = db.Residents.findOne({"firstName": younger.firstName}, {"firstName": 1});
+    var friendId = db.Residents.findOne({"firstName": friend.firstName}, {"firstName": 1});
 
     //weekdays the brothers work and the friend trains twice a day
     if (today >= 1 || today < 6)
