@@ -1,0 +1,34 @@
+<template name="employeeTable">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Sex</th>
+            <th>Date of Birth</th>
+            <th>Race</th>
+            <th>Position</th>
+            <th>Previous Occupation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each employees}}
+            {{> employeeRow}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="employeeRow">
+    <tr>
+        <th scope="row">{{ id }}</th>
+        <td>{{ firstName }}</td>
+        <td>{{ lastName }}</td>
+        <td>{{ sex }}</td>
+        <td>{{ dateOfBirth }}</td>
+        <td>{{ race }}</td>
+        <td>{{ position }}</td>
+        <td>{{ previousOccupation }}</td>
+    </tr>
+</template>

@@ -17,6 +17,9 @@ import '../../ui/pages/error/error';
 import '../../ui/pages/residents/add/add_residents';
 import '../../ui/pages/residents/listing/residents';
 
+import '../../ui/pages/employees/add/add_employee';
+import '../../ui/pages/employees/listing/employees';
+
 import '../../ui/pages/loading/loading'
 
 Router.configure({
@@ -61,7 +64,34 @@ Router.route('/residents/add',
         this.render("add_resident")
     },
     {
-        title: "Residents"
+        title: "Add Resident"
+    }
+);
+
+Router.route('/employees',
+    function () {
+        this.render("employees")
+    },
+    {
+        title: "Employees"
+    }
+);
+
+Router.route('/employees/add',
+    function () {
+        this.render("add_employee")
+    },
+    {
+        title: "Add Employment"
+    }
+);
+
+Router.route('/times',
+    function () {
+        this.render("times")
+    },
+    {
+        title: "View Timestamps"
     }
 );
 

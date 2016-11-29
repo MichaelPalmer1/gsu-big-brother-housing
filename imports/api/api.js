@@ -10,3 +10,6 @@ import './leases/methods.js';
 
 import './timestamp/timestamp.js';
 import './timestamp/methods.js';
+
+import './employees/employees';
+import './employees/methods';
