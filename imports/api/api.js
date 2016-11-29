@@ -5,7 +5,7 @@ import './apartments/methods.js';
 import './residents/residents.js';
 import './residents/methods.js';
 
-import './leases/leases.js';
+import './leases/leases';
 import './leases/methods.js';
 
 import './timestamp/timestamp.js';

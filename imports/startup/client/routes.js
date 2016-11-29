@@ -12,7 +12,7 @@ import '../../ui/layouts/main_layout/main.html';
 
 // import javascript files for each page
 import '../../ui/pages/home/home';
-import '../../ui/pages/admin/admin';
+import '../../ui/pages/leases/leases';
 import '../../ui/pages/error/error';
 import '../../ui/pages/residents/add/add_residents';
 import '../../ui/pages/residents/listing/residents';
@@ -21,36 +21,35 @@ import '../../ui/pages/loading/loading';
 
 
 Router.configure({
-   layoutTemplate: "main",
-   notFoundTemplate: "error"
+    layoutTemplate: "main",
+    notFoundTemplate: "error"
 });
 
 
 Router.route('/',
-    function() {
+    function () {
         this.render("home");
     },
     {
-        title: 'Home'
+        title: 'Home',
+        loadingTemplate: 'loading',
+        waitOn: function () {
+            return Meteor.subscribe('TimeStamp');
+        }
     }
 );
 
-Router.route('/admin',
-    function() {
-        this.render("admin");
+Router.route('/leases',
+    function () {
+        this.render("leases");
     },
     {
-        title: 'Admin',
-        //loadingTemplate: 'loading',
-        //waitOn: function() {
-        //    console.log("waiting");
-        //    return Meteor.subscribe('TimeStamp');
-        //}
+        title: 'Leases',
     }
 );
 
 Router.route('/residents',
-    function() {
+    function () {
         this.render("residents")
     },
     {
@@ -59,7 +58,7 @@ Router.route('/residents',
 );
 
 Router.route('/residents/add',
-    function() {
+    function () {
         this.render("add_resident")
     },
     {
@@ -68,6 +67,6 @@ Router.route('/residents/add',
 );
 
 
-Router.onAfterAction(function() {
+Router.onAfterAction(function () {
     document.title = 'Big Brother Housing - ' + this.route.options.title;
 });
