@@ -56,11 +56,36 @@
     <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Popular Hours to be Present</h2>
+                <h2>Present Residents with Highest Salaries
+                    <!--<small>basic table subtitle</small>-->
+                </h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <canvas id="popularTimes">{{ popularTimesChart }}</canvas>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Salary</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                        {{#each topResidents}}
+                            <tr>
+                                <td>{{ count }}</td>
+                                <td>{{ lastName }}</td>
+                                <td>{{ firstName }}</td>
+                                <td>{{ salary }}</td>
+                            </tr>
+                        {{/each}}
+
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </div>

@@ -134,6 +134,16 @@ Template.residentStats.helpers({
             updateChart();
         });
     },
+    topResidents: function() {
+
+        return Residents.find({'present': true}, {
+            sort: {salary: -1},
+            limit: 4
+        }).map(function (resident, index) {
+            resident.count = index + 1;
+            return resident;
+        });
+    },
     popularTimesChart: function () {
 
         var hour_labels = [];
@@ -144,7 +154,7 @@ Template.residentStats.helpers({
         //var timestamp;
         var hour_frequencies_raw = {};
         var hour_frequencies = []; // list of dicts of the form: {data: [freq_count], label: hour}
-        var timestamps = TimeStamp.find({});
+        var timestamps = TimeStamp.find({'arriving': true});
 
         timestamps.forEach(function (timestamp) {
             var hour = new Date(timestamp.time);
@@ -154,21 +164,6 @@ Template.residentStats.helpers({
 
         console.log(hour_frequencies_raw);
 
-
-        //for (var [key, value] of Object.entries(hour_frequencies_raw)) {
-        //    var data = [];
-        //    for (var i = 0; i < 24; i++)
-        //        data.push(null);
-        //
-        //    data[key] = value;
-        //
-        //    hour_frequencies.push({
-        //        data: data,
-        //        label: parseInt(key),
-        //        backgroundColor: '#26B99A',
-        //        barPercentage: 1
-        //    });
-        //}
         var chart_data = [];
         for (var i = 0; i < 24; i++)
             chart_data.push(0);
@@ -205,9 +200,9 @@ Template.residentStats.helpers({
             // update this
             let data = charts.popularTimes.data.datasets[0].data;
             let labels = charts.popularTimes.data.labels;
-            //for (let i = 0; i < data.length; i++) {
-                //data[i] = TimeStamp.find(}, {reactive: false}).count();
-            //}
+            for (let i = 0; i < data.length; i++) {
+                data[i] = TimeStamp.find({}, {reactive: false}).count();
+            }
             //console.log(charts.popularTimes.data);
             charts.popularTimes.update();
         }
