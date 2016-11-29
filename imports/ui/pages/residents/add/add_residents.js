@@ -1,10 +1,11 @@
 import './add_resident.html';
 import { Residents } from '../../../../api/residents/residents';
+import { Leases } from '../../../../api/leases/leases';
 
 
-Template.add_resident.rendered = function() {
+Template.add_resident.rendered = function () {
 
-    $.getScript('/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js', function(){
+    $.getScript('/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js', function () {
         $('#wizard').smartWizard();
 
 
@@ -13,12 +14,12 @@ Template.add_resident.rendered = function() {
         $('.buttonFinish').addClass('btn btn-default');
 
         // Not in Template.add_resident.events as that won't add events to the programatically added btns
-        $(".buttonFinish").click(function(event) {
+        $(".buttonFinish").click(function (event) {
             event.preventDefault();
 
             var first_name = $("#first-name").val();
             var last_name = $("#last-name").val();
-            var gender = $("#gender .active").text().replace(/\s/g,'').toLowerCase();
+            var gender = $("#gender .active").text().replace(/\s/g, '').toLowerCase();
             var birthday = new Date($("#birthday").val());
             var demo = $("#demographic").val();
             var occupation = $("#occupation").val();
@@ -32,7 +33,7 @@ Template.add_resident.rendered = function() {
             rent.replace('$', '');
             rent = parseInt(rent);
 
-            Residents.insert({
+            var resident_id = Residents.insert({
                 'firstName': first_name,
                 'lastName': last_name,
                 'sex': gender,
@@ -40,8 +41,19 @@ Template.add_resident.rendered = function() {
                 'race': demo,
                 'salary': salary,
                 'occupation': occupation,
-                'apartment': null,
+                'apartment': apt_num,
                 'present': true
+            });
+
+            var resident = Residents.findOne({'_id': resident_id});
+
+            Leases.insert({
+                'signer': resident,
+                'rent': rent,
+                'startDate': start_date,
+                'endDate': end_date,
+                'apartment': apt_num
+
             });
 
             Router.go('/residents');
