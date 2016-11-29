@@ -34,7 +34,7 @@ Router.route('/',
         title: 'Home',
         loadingTemplate: 'loading',
         waitOn: function () {
-            return Meteor.subscribe('TimeStamp');
+            return Meteor.subscribe('Residents');
         }
     }
 );
