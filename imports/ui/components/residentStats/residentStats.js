@@ -5,7 +5,6 @@ import Chart from 'chart.js/dist/Chart.min';
 import './residentStats.html';
 import './residentStats.css';
 
-Meteor.subscribe('TimeStamp');
 
 let charts = {
     presence: null,

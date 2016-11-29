@@ -17,8 +17,6 @@ import '../../ui/pages/error/error';
 import '../../ui/pages/residents/add/add_residents';
 import '../../ui/pages/residents/listing/residents';
 
-import '../../ui/pages/loading/loading';
-
 
 Router.configure({
     layoutTemplate: "main",
@@ -32,10 +30,6 @@ Router.route('/',
     },
     {
         title: 'Home',
-        loadingTemplate: 'loading',
-        waitOn: function () {
-            return Meteor.subscribe('Residents');
-        }
     }
 );
 

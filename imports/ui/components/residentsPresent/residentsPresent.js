@@ -5,7 +5,6 @@ import './residentsPresent.html';
 
 Template.residentsPresent.onCreated(function onCreated() {
     Meteor.subscribe('residents');
-
 });
 
 
