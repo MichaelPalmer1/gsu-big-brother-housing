@@ -138,7 +138,7 @@ Template.residentStats.helpers({
 
         return Residents.find({'present': true}, {
             sort: {salary: -1},
-            limit: 4
+            limit: 10
         }).map(function (resident, index) {
             resident.count = index + 1;
             return resident;
