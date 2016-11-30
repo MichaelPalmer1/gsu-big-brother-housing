@@ -14,3 +14,9 @@ Template.residentsTable.helpers({
         });
     },
 });
+
+Template.residentsTable.events({
+    'click .delete'() {
+        Meteor.call('residents.remove', this._id);
+    },
+});

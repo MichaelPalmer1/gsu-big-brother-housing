@@ -14,3 +14,9 @@ Template.employeeTable.helpers({
         });
     },
 });
+
+Template.employeeTable.events({
+    'click .delete'() {
+        Meteor.call('employees.remove', this._id);
+    },
+});

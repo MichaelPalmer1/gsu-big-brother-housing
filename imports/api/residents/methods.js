@@ -20,5 +20,9 @@ Meteor.methods
             lastName: lastName
         });
     },
+    'residents.remove'(residentId) {
+        check(residentId, String);
+        Residents.remove(residentId);
+    },
 
 });
