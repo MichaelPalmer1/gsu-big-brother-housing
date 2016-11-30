@@ -2,6 +2,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th></th>
             <th>#</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -22,6 +23,7 @@
 
 <template name="employeeRow">
     <tr>
+        <th><button class="delete"><i class="fa fa-trash"></i></button></th>
         <th scope="row">{{ id }}</th>
         <td>{{ firstName }}</td>
         <td>{{ lastName }}</td>

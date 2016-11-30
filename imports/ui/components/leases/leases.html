@@ -2,6 +2,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th></th>
             <th>Apt #</th>
             <th>Rent</th>
             <th>Start Date</th>
@@ -19,6 +20,7 @@
 
 <template name="leaseRow">
     <tr>
+        <th><button class="delete"><i class="fa fa-trash"></i></button></th>
         <th scope="row">{{ apartment }}</th>
         <td>{{#if rent}}${{/if}}{{ rent }}</td>
         <td>{{ startDate }}</td>

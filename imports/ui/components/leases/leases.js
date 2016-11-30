@@ -11,3 +11,9 @@ Template.leasesTable.helpers({
         return Leases.find({});
     },
 });
+
+Template.leasesTable.events({
+    'click .delete'() {
+        Meteor.call('leases.remove', this._id);
+    },
+});
