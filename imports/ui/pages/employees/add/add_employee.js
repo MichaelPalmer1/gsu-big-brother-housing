@@ -9,8 +9,8 @@ Template.add_employee.rendered = function () {
     $.getScript('/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js', function () {
         $('#wizard').smartWizard();
 
-        $('.buttonNext').addClass('btn btn-success');
-        $('.buttonPrevious').addClass('btn btn-primary');
+        $('.buttonNext').hide();
+        $('.buttonPrevious').hide();
         $('.buttonFinish').addClass('btn btn-default');
 
         // Not in Template.add_resident.events as that won't add events to the programatically added btns
