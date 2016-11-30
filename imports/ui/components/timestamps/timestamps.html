@@ -1,0 +1,26 @@
+<template name="timestampTable">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Arriving</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each timestamps}}
+            {{> timestampRow}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="timestampRow">
+    <tr>
+        <th scope="row">{{ id }}</th>
+        <td>{{ name }}</td>
+        <td>{{#if arriving}}Arriving{{else}}Departing{{/if}}</td>
+        <td>{{ time }}</td>
+    </tr>
+</template>

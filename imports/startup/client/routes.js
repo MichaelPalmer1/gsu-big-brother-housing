@@ -20,7 +20,9 @@ import '../../ui/pages/residents/listing/residents';
 import '../../ui/pages/employees/add/add_employee';
 import '../../ui/pages/employees/listing/employees';
 
-import '../../ui/pages/loading/loading'
+import '../../ui/pages/timestamps/timestamps';
+
+import '../../ui/pages/loading/loading';
 
 Router.configure({
     layoutTemplate: "main",
@@ -91,7 +93,10 @@ Router.route('/times',
         this.render("times")
     },
     {
-        title: "View Timestamps"
+        title: "View Timestamps",
+        waitOn: function() {
+            return Meteor.subscribe('TimeStamp');
+        }
     }
 );
 

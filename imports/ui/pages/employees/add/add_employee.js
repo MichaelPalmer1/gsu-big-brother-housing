@@ -9,7 +9,6 @@ Template.add_employee.rendered = function () {
     $.getScript('/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js', function () {
         $('#wizard').smartWizard();
 
-
         $('.buttonNext').addClass('btn btn-success');
         $('.buttonPrevious').addClass('btn btn-primary');
         $('.buttonFinish').addClass('btn btn-default');
