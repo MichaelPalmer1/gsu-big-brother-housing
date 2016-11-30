@@ -14,3 +14,9 @@ Template.timestampTable.helpers({
         });
     },
 });
+
+Template.timestampTable.events({
+    'click .delete'() {
+        Meteor.call('timestamp.remove', this._id);
+    },
+});
