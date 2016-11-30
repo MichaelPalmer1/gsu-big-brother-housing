@@ -1,21 +1,29 @@
 <template name="residentsPresent">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Sex</th>
-            <th>Demographic</th>
-            <th>Present / Absent</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each residents}}
-            {{> residentPresentRow}}
-        {{/each}}
-        </tbody>
-    </table>
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Residents Present</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Sex</th>
+                    <th>Demographic</th>
+                    <th>Present / Absent</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each residents}}
+                    {{> residentPresentRow}}
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </template>
 
 <template name="residentPresentRow">
